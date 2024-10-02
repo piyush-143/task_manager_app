@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_manager_app/view/home_view.dart';
+import 'package:task_manager_app/view_model/priority_provider.dart';
 import 'package:task_manager_app/view_model/task_list_provider.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TaskListProvider()),
+        ChangeNotifierProvider(create: (_) => PriorityProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

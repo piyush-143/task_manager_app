@@ -16,5 +16,6 @@ class TaskListProvider with ChangeNotifier {
 
   void deleteTask(int idx) {
     _taskList.removeAt(idx);
+    notifyListeners();
   }
 }

@@ -31,7 +31,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
         style: const TextStyle(fontSize: 20),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-      content: Container(
+      content: SizedBox(
         width: 350,
         height: 220,
         child: Column(

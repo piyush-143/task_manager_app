@@ -88,95 +88,101 @@ class _HomeViewState extends State<HomeView> {
                     decoration: TextDecoration.underline,
                   ),
                 ))
-              : ListView.builder(
-                  itemCount: value.taskList.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: (value.taskList[index]['Priority'] == 'High')
-                          ? Colors.redAccent.shade700
-                          : (value.taskList[index]['Priority'] == 'Medium')
-                              ? Colors.yellowAccent
-                              : Colors.greenAccent,
-                      child: ListTile(
-                        title: Text(value.taskList[index]['Title'].toString()),
-                        subtitle: Text(
-                            value.taskList[index]['Description'].toString()),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      content: CustomDropDownButton(
-                                        onChanged: (String? newVal) {
-                                          priorityProvider
-                                              .setDropDownValue(newVal!);
-                                          value.taskList[index]['Priority'] =
-                                              newVal;
-                                        },
-                                      ),
-                                    ),
-                                  );
-                                },
-                                icon: const Icon(
-                                  Icons.priority_high,
-                                  color: Colors.black,
-                                )),
-                            IconButton(
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return CustomDialogBox(
-                                      titleController: titleController,
-                                      descpController: descpController,
-                                      heading: 'Edit Task',
-                                      onPress: () {
-                                        if (titleController.text.isEmpty ||
-                                            descpController.text.isEmpty) {
-                                          Utils.snackBarMessage(context);
-                                        } else {
-                                          newTaskProvider.updateTask({
-                                            'Title':
-                                                titleController.text.toString(),
-                                            'Description':
-                                                descpController.text.toString(),
-                                            'Priority': value.taskList[index]
-                                                ['Priority'],
-                                          }, index);
-                                          titleController.clear();
-                                          descpController.clear();
-                                        }
-                                      },
-                                      priorityWidget: Container(
-                                        width: 5,
-                                        height: 5,
-                                        color: Colors.red,
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    itemCount: value.taskList.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        color: (value.taskList[index]['Priority'] == 'High')
+                            ? Colors.redAccent.shade700
+                            : (value.taskList[index]['Priority'] == 'Medium')
+                                ? Colors.yellowAccent
+                                : Colors.greenAccent,
+                        elevation: 3,
+                        child: ListTile(
+                          isThreeLine: true,
+                          title:
+                              Text(value.taskList[index]['Title'].toString()),
+                          subtitle: Text(
+                              value.taskList[index]['Description'].toString()),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        content: CustomDropDownButton(
+                                          onChanged: (String? newVal) {
+                                            priorityProvider
+                                                .setDropDownValue(newVal!);
+                                            value.taskList[index]['Priority'] =
+                                                newVal;
+                                          },
+                                        ),
                                       ),
                                     );
                                   },
-                                );
-                              },
-                              icon: const Icon(
-                                Icons.edit,
-                                color: Colors.blueAccent,
-                              ),
-                            ),
-                            IconButton(
+                                  icon: const Icon(
+                                    Icons.priority_high,
+                                    color: Colors.black,
+                                  )),
+                              IconButton(
                                 onPressed: () {
-                                  value.deleteTask(index);
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return CustomDialogBox(
+                                        titleController: titleController,
+                                        descpController: descpController,
+                                        heading: 'Edit Task',
+                                        onPress: () {
+                                          if (titleController.text.isEmpty ||
+                                              descpController.text.isEmpty) {
+                                            Utils.snackBarMessage(context);
+                                          } else {
+                                            newTaskProvider.updateTask({
+                                              'Title': titleController.text
+                                                  .toString(),
+                                              'Description': descpController
+                                                  .text
+                                                  .toString(),
+                                              'Priority': value.taskList[index]
+                                                  ['Priority'],
+                                            }, index);
+                                            titleController.clear();
+                                            descpController.clear();
+                                          }
+                                        },
+                                        priorityWidget: const SizedBox(
+                                          width: 5,
+                                          height: 5,
+                                        ),
+                                      );
+                                    },
+                                  );
                                 },
                                 icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                )),
-                          ],
+                                  Icons.edit,
+                                  color: Colors.blueAccent,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    value.deleteTask(index);
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  )),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
         ),
       ),

@@ -5,8 +5,8 @@ class PriorityProvider with ChangeNotifier {
   String _dropdownValue = 'High';
   String get dropdownValue => _dropdownValue;
 
-  setDropDownValue(String val) {
-    _dropdownValue = val;
+  setDropDownValue(String? val) {
+    _dropdownValue = val!;
     notifyListeners();
   }
 }

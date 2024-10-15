@@ -33,7 +33,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
       content: SizedBox(
         width: 350,
-        height: 220,
+        height: 230,
         child: Column(
           children: [
             TextFormField(

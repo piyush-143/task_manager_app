@@ -1,4 +1,4 @@
-# task_manager_app
+# todo_app
 <p>
 I have developed a Task Manager App using the Flutter framework based on Dart language. For state management, I have used the provider.
 </br></br>
